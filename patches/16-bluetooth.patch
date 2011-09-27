@@ -361,7 +361,7 @@ here still, but for now we keep this here.
  	if (session->hid) {
  		hid_destroy_device(session->hid);
  		session->hid = NULL;
-@@ -1086,10 +1215,15 @@ unlink:
+@@ -1086,9 +1215,14 @@ unlink:
  purge:
  	skb_queue_purge(&session->ctrl_transmit);
  	skb_queue_purge(&session->intr_transmit);
@@ -374,7 +374,6 @@ here still, but for now we keep this here.
 +	if (session->hid)
 +		hid_free_device(session->hid);
 +#endif
- 	input_free_device(session->input);
  	kfree(session);
  	return err;
 @@ -1174,6 +1308,7 @@ int hidp_get_conninfo(struct hidp_connin
