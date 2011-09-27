@@ -130,6 +130,6 @@ thread in process context as well.
 +#if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,31)
 +	struct compat_threaded_irq irq_compat;
 +#endif
- };
- 
- struct wl1271_station {
+
+	/* number of currently active RX BA sessions */
+	int ba_rx_session_count;
