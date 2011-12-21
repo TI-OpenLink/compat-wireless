@@ -59,7 +59,7 @@ suspend and resume that are not backported.
  
  static void ath6kl_sdio_stop(struct ath6kl *ar)
  {
-@@ -888,14 +890,16 @@ static const struct ath6kl_hif_ops ath6k
+@@ -888,18 +890,20 @@ static const struct ath6kl_hif_ops ath6k
  	.enable_scatter = ath6kl_sdio_enable_scatter,
  	.scat_req_rw = ath6kl_sdio_async_rw_scatter,
  	.cleanup_scatter = ath6kl_sdio_cleanup_scatter,
@@ -67,6 +67,10 @@ suspend and resume that are not backported.
  	.suspend = ath6kl_sdio_suspend,
  	.resume = ath6kl_sdio_resume,
 +#endif
+ 	.diag_read32 = ath6kl_sdio_diag_read32,
+ 	.diag_write32 = ath6kl_sdio_diag_write32,
+ 	.bmi_read = ath6kl_sdio_bmi_read,
+ 	.bmi_write = ath6kl_sdio_bmi_write,
  	.power_on = ath6kl_sdio_power_on,
  	.power_off = ath6kl_sdio_power_off,
  	.stop = ath6kl_sdio_stop,
