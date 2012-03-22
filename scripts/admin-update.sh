@@ -599,6 +599,18 @@ GIT_REMOTE_URL=$(git config remote.${GIT_REMOTE}.url)
 GIT_REMOTE_URL=${GIT_REMOTE_URL:-unknown}
 echo -e "${GREEN}Updated${NORMAL} from local tree: ${BLUE}${GIT_TREE}${NORMAL}"
 echo -e "Origin remote URL: ${CYAN}${GIT_REMOTE_URL}${NORMAL}"
+
+echo -e "Getting TI drivers version..."
+TI_VERSION=`git describe --dirty`
+TI_DRIVERS="wlcore wl12xx wl18xx"
+TI_PATH=drivers/net/wireless/ti
+echo -e "TI drivers version: ${TI_VERSION}"
+for driver in ${TI_DRIVERS}; do
+    echo "static const char *${driver}_timestamp = __TIMESTAMP__;" > \
+	${DIR}/${TI_PATH}/${driver}/version.h
+    echo "static const char *${driver}_git_head = \"${TI_VERSION}\";" >>  \
+	${DIR}/${TI_PATH}/${driver}/version.h
+done
 cd $DIR
 if [ -d ./.git ]; then
 	if [[ ${POSTFIX_RELEASE_TAG} != "" ]]; then
