@@ -374,21 +374,6 @@ compiler warnings. This is going to be sent upstream.
  #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
  
  #include <linux/types.h>
---- a/net/bluetooth/lib.c
-+++ b/net/bluetooth/lib.c
-@@ -24,10 +24,11 @@
- 
- /* Bluetooth kernel library. */
- 
-+#undef pr_fmt
- #define pr_fmt(fmt) "Bluetooth: " fmt
- 
- #include <linux/module.h>
--
-+#include <linux/printk.h>
- #include <linux/kernel.h>
- #include <linux/stddef.h>
- #include <linux/string.h>
 --- a/net/wireless/lib80211.c
 +++ b/net/wireless/lib80211.c
 @@ -13,8 +13,10 @@
@@ -781,42 +766,3 @@ compiler warnings. This is going to be sent upstream.
  #include "htc.h"
  
  MODULE_AUTHOR("Atheros Communications");
---- a/drivers/net/wireless/iwlwifi/iwl-agn.c
-+++ b/drivers/net/wireless/iwlwifi/iwl-agn.c
-@@ -27,8 +27,10 @@
-  *
-  *****************************************************************************/
- 
-+#undef pr_fmt
- #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
- 
-+#include <linux/printk.h>
- #include <linux/kernel.h>
- #include <linux/module.h>
- #include <linux/init.h>
---- a/drivers/net/wireless/iwlwifi/iwl-pci.c
-+++ b/drivers/net/wireless/iwlwifi/iwl-pci.c
-@@ -61,8 +61,10 @@
-  *
-  *****************************************************************************/
- 
-+#undef pr_fmt
- #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
- 
-+#include <linux/printk.h>
- #include <linux/module.h>
- #include <linux/pci.h>
- #include <linux/pci-aspm.h>
---- a/drivers/net/wireless/ath/ath5k/eeprom.c
-+++ b/drivers/net/wireless/ath/ath5k/eeprom.c
-@@ -21,8 +21,10 @@
- * EEPROM access functions and helpers *
- \*************************************/
- 
-+#undef pr_fmt
- #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
- 
-+#include <linux/printk.h>
- #include <linux/slab.h>
- 
- #include "ath5k.h"
