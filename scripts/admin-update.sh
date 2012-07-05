@@ -605,6 +605,20 @@ GIT_REMOTE=${GIT_REMOTE:-origin}
 GIT_REMOTE_URL=$(git config remote.${GIT_REMOTE}.url)
 GIT_REMOTE_URL=${GIT_REMOTE_URL:-unknown}
 
+
+echo -e "Getting TI drivers version..."
+TI_VERSION=`git describe --dirty`
+TI_DRIVERS="wlcore wl12xx wl18xx"
+TI_PATH=drivers/net/wireless/ti
+echo -e "TI drivers version: ${TI_VERSION}"
+for driver in ${TI_DRIVERS}; do
+	echo "static const char *${driver}_timestamp = __TIMESTAMP__;" > \
+		${DIR}/${TI_PATH}/${driver}/version.h
+	echo "static const char *${driver}_git_head = \"${TI_VERSION}\";" >>  \
+		${DIR}/${TI_PATH}/${driver}/version.h
+done
+
+
 cd $GIT_COMPAT_TREE
 git describe > $DIR/.compat_base
 cd $DIR
