@@ -1069,6 +1069,17 @@ for subsystem in $SUBSYSTEMS; do
 	done
 done
 
+echo -e "Getting TI drivers version..."
+TI_VERSION=`git describe --dirty`
+TI_DRIVERS="wlcore wl12xx wl18xx"
+TI_PATH=drivers/net/wireless/ti
+for driver in ${TI_DRIVERS}; do
+	echo "static const char *${driver}_timestamp = __TIMESTAMP__;" > \
+		${TI_PATH}/${driver}/version.h
+	echo "static const char *${driver}_git_head = \"${TI_VERSION}\";" >>  \
+		${TI_PATH}/${driver}/version.h
+done
+
 refresh_compat
 gen_compat_labels
 
